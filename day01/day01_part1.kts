@@ -10,20 +10,26 @@ import java.util.Scanner
 val file = File("input.txt")
 val scanner = Scanner(file.inputStream())
 
-var maxCalories = 0;
-var currentElfCalories = 0;
+var maxCalories = 0
+var currentElfCalories = 0
 
 while (scanner.hasNext()) {
-    val currentCalories = scanner.nextLine();
+    val currentCalories = scanner.nextLine()
 
     if (currentCalories.isBlank()) {
-        if (currentElfCalories > maxCalories) {
-            maxCalories = currentElfCalories;
-        }
-        currentElfCalories = 0;
+        updateMaxCalories()
     } else {
-        currentElfCalories += currentCalories.toInt();
+        currentElfCalories += currentCalories.toInt()
     }
 }
 
-println("Max calories found: $maxCalories");
+updateMaxCalories()
+
+println("Max calories found: $maxCalories")
+
+fun updateMaxCalories() {
+    if (currentElfCalories > maxCalories) {
+        maxCalories = currentElfCalories
+    }
+    currentElfCalories = 0
+}

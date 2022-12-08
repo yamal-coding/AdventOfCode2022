@@ -3,10 +3,10 @@ import java.util.*;
 import java.util.stream.*;
 
 /*
- * Part 1 of day 5: https://adventofcode.com/2022/day/5
+ * Part 2 of day 5: https://adventofcode.com/2022/day/5
  */
 
-public class Day05Part1 {
+public class Day05Part2 {
     public static void main(String[] args) throws FileNotFoundException {
         File file = new File("input.txt");
         Scanner scanner = new Scanner(new FileInputStream(file));
@@ -49,9 +49,15 @@ public class Day05Part1 {
             scanner.next(); // Skip "destination" token
             int destination = scanner.nextInt() - 1;
 
+            Stack<Character> cratesToBeMoved = new Stack<>();
             for (int i = 0; i < numOfCrates; i++) {
                 char crateToBeMoved = stacks.get(origin).getFirst();
                 stacks.get(origin).removeFirst();
+                cratesToBeMoved.push(crateToBeMoved);
+            }
+
+            for (int i = 0; i < numOfCrates; i++) {
+                char crateToBeMoved = cratesToBeMoved.pop();
                 stacks.get(destination).addFirst(crateToBeMoved);
             }
         }
